@@ -1,8 +1,16 @@
 import sys
 from Types import *
 c = 0
-mem = '00000101'
-
+d={}
+def memory():
+    global c
+    var=bin(c)[2:]
+    c+=1
+    if(len(var)<8):
+        zeroes=8-len(var)
+        var="0"*zeroes+var
+    return var
+    
 
 def take_input():
     input_arr = []
@@ -13,6 +21,9 @@ def take_input():
 
         if line.strip() == 'hlt':
             break
+    for i in range(len(input_arr)):
+       if(input_arr[i].split()[0]=="var"):
+           d[input_arr[i].split()[1]]=memory()
 
     return input_arr
 
