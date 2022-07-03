@@ -5,16 +5,26 @@ mem = '00000101'
 
 
 def take_input():
-    var_arr = []
-    label_arr = []
-    line_no = 1
-    var_flag = 0
-
-    output_arr = []
+    input_arr = []
 
     for line in sys.stdin:
-        line = line[:-1]
-        line_arr = [str(x) for x in line.split(' ')]
+        line_arr = [str(x) for x in line.split(" ")]
+        input_arr.append(line_arr)
+
+        if line.strip() == 'hlt':
+            break
+
+    return input_arr
+
+
+def give_output(input_arr):
+    for line_arr in input_arr:
+        var_arr = []
+        label_arr = []
+        output_arr = []
+
+        line_no = 1
+        var_flag = 0
 
         if len(line_arr) > 5:
             print("'ERROR: Invalid Instruction'")
@@ -68,14 +78,14 @@ def take_input():
                 print("ERROR: Invalid Instruction")
                 exit()
 
-        if line == 'hlt':
-            break
-
         line_no += 1
 
     return output_arr
 
 
-output_arr = take_input()
+input_arr = take_input()
+
+output_arr = give_output(input_arr)
+
 for x in output_arr:
     print(x)
