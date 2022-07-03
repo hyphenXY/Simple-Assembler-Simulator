@@ -1,16 +1,18 @@
 import sys
 from Types import *
 c = 0
-d={}
+d = {}
+
+
 def memory():
     global c
-    var=bin(c)[2:]
-    c+=1
-    if(len(var)<8):
-        zeroes=8-len(var)
-        var="0"*zeroes+var
+    var = bin(c)[2:]
+    c += 1
+    if(len(var) < 8):
+        zeroes = 8-len(var)
+        var = "0"*zeroes+var
     return var
-    
+
 
 def take_input():
     input_arr = []
@@ -19,11 +21,64 @@ def take_input():
         line_arr = [str(x) for x in line.split(" ")]
         input_arr.append(line_arr)
 
-        if line.strip() == 'hlt':
+        line_no = 1
+        var_flag = 0
+
+        if len(line_arr) > 5:
+            print("'ERROR: Invalid Instruction'")
+            exit()
+
+        if len(line_arr) == 2 and line_arr[0] == 'var':
+            if var_flag == 1:
+                print("ERROR: Variable Not Declared in Beginning")
+                exit()
+        else:
+            var_flag = 1
+
+        if line_arr[0] != "var" and line_arr[0][-1] != ':':
+            ins_type = Type(line_arr[1:])
+            if ins_type == 'A' and len(line_arr) == 4:
+                pass
+            elif ins_type == 'B' and len(line_arr) == 3:
+                pass
+            elif ins_type == 'C' and len(line_arr) == 3:
+                pass
+            elif ins_type == 'D' and len(line_arr) == 3:
+                pass
+            elif ins_type == 'E' and len(line_arr) == 2:
+                pass
+            elif ins_type == 'F' and len(line_arr) == 1:
+                pass
+            else:
+                print("ERROR: Invalid Instruction")
+                exit()
+
+        if line_arr[0][-1] == ':':
+            ins_type = Type(line_arr[1:])
+            if ins_type == 'A' and len(line_arr) == 5:
+                pass
+            elif ins_type == 'B' and len(line_arr) == 4:
+                pass
+            elif ins_type == 'C' and len(line_arr) == 4:
+                pass
+            elif ins_type == 'D' and len(line_arr) == 4:
+                pass
+            elif ins_type == 'E' and len(line_arr) == 3:
+                pass
+            elif ins_type == 'F' and len(line_arr) == 1:
+                pass
+            else:
+                print("ERROR: Invalid Instruction")
+                exit()
+
+        line_no += 1
+
+        if line == 'hlt':
             break
+
     for i in range(len(input_arr)):
-       if(input_arr[i].split()[0]=="var"):
-           d[input_arr[i].split()[1]]=memory()
+        if(input_arr[i].split()[0] == "var"):
+            d[input_arr[i].split()[1]] = memory()
 
     return input_arr
 
