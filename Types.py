@@ -1,3 +1,7 @@
+global line_no
+line_no = 1
+
+
 def memory():
     global c
     var = bin(c)[2:]
@@ -60,7 +64,7 @@ def Type(strlist):
     elif strlist[0] == 'hlt':
         return 'F'
     else:
-        print('\nERROR: Instruction not Defined')
+        print(f'{line_no}: ERROR => Instruction not Defined')
         exit()
 
 
@@ -99,7 +103,7 @@ def typeA(strlist):
     elif r1 == 'R6':
         ans += '100'
     elif r1 == 'FLAGS':
-        print('ERROR: Invalid Instruction')
+        print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     else:
         print('ERROR: Register not Defined')
@@ -122,10 +126,10 @@ def typeA(strlist):
     elif r2 == 'R6':
         ans += '100'
     elif r1 == 'FLAGS':
-        print('ERROR: Invalid Instruction')
+        print(f'{line_no}: ERROR =>  Invalid Instruction')
         exit()
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     r3 = strlist[3]
@@ -145,10 +149,10 @@ def typeA(strlist):
     elif r3 == 'R6':
         ans += '100'
     elif r1 == 'FLAGS':
-        print('ERROR: Invalid Instruction')
+        print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     return ans
@@ -180,10 +184,10 @@ def typeB(strlist):
     elif r1 == 'R6':
         ans += '100'
     elif r1 == 'FLAGS':
-        print('ERROR: Invalid Instruction')
+        print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     ans += binary(int(strlist[2][1:]))
@@ -219,7 +223,7 @@ def typeC(strlist):
     elif strlist[1] == 'R6':
         ans += '110'
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     if strlist[2] == 'R0':
@@ -239,7 +243,7 @@ def typeC(strlist):
     elif strlist[2] == 'FLAGS' and strlist[0] == 'mov':
         ans += '111'
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     return ans
@@ -265,10 +269,10 @@ def typeD(strlist, mem):
         elif r1 == 'R6':
             strD += '100'
         elif r1 == 'FLAGS':
-            print('ERROR: Invalid Instruction')
+            print(f'{line_no}: ERROR => Invalid Instruction')
             exit()
         else:
-            print('ERROR: Register not Defined')
+            print(f'{line_no}: ERROR => Register not Defined')
             exit()
 
         strD += mem
@@ -291,10 +295,10 @@ def typeD(strlist, mem):
         elif r1 == 'R6':
             strD += '100'
         elif r1 == 'FLAGS':
-            print('ERROR: Invalid Instruction')
+            print(f'{line_no}: ERROR => Invalid Instruction')
             exit()
         else:
-            print('ERROR: Register not Defined')
+            print(f'{line_no}: ERROR => Register not Defined')
             exit()
 
         strD += mem
@@ -316,10 +320,16 @@ def typeE(strlist, mem):
     elif strlist[0] == 'je':
         strE += '01111'
         strE += mem
+    else:
+        print(f'{line_no}: ERROR => Invalid Instruction')
+        exit()
 
     return strE
 
 
-def typeF():
+def typeF(strlist):
+    if strlist != 'hlt':
+        print(f'{line_no}: ERROR => Invalid Instruction')
+        exit()
     strF = '01010' + '0'*11
     return strF
