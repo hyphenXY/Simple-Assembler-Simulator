@@ -25,12 +25,12 @@ def take_input():
         var_flag = 0
 
         if len(line_arr) > 5:
-            print("'ERROR: Invalid Instruction'")
+            print(f"{line_no}: ERROR => Invalid Instruction")
             exit()
 
         if len(line_arr) == 2 and line_arr[0] == 'var':
             if var_flag == 1:
-                print("ERROR: Variable Not Declared in Beginning")
+                print(f"{line_no}: ERROR => Variable Not Declared in Beginning")
                 exit()
         else:
             var_flag = 1
@@ -50,7 +50,7 @@ def take_input():
             elif ins_type == 'F' and len(line_arr) == 1:
                 pass
             else:
-                print("ERROR: Invalid Instruction")
+                print(f"{line_no}: ERROR => Invalid Instruction")
                 exit()
 
         if line_arr[0][-1] == ':':
@@ -68,7 +68,7 @@ def take_input():
             elif ins_type == 'F' and len(line_arr) == 1:
                 pass
             else:
-                print("ERROR: Invalid Instruction")
+                print(f"{line_no}: ERROR => Invalid Instruction")
                 exit()
 
         line_no += 1
