@@ -218,8 +218,6 @@ def typeC(strlist):
         ans += '101'
     elif strlist[1] == 'R6':
         ans += '110'
-    elif strlist[1] == 'FLAGS':
-        ans += '111'
     else:
         print('ERROR: Register not Defined')
         exit()
@@ -238,7 +236,7 @@ def typeC(strlist):
         ans += '101'
     elif strlist[2] == 'R6':
         ans += '110'
-    elif strlist[2] == 'FLAGS':
+    elif strlist[2] == 'FLAGS' and strlist[0] == 'mov':
         ans += '111'
     else:
         print('ERROR: Register not Defined')
