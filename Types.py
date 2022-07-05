@@ -61,7 +61,7 @@ def Type(strlist):
         return 'E'
     elif strlist[0] == 'je':
         return 'E'
-    elif strlist[0] == 'hlt':
+    elif strlist[0] == 'hlt\n':
         return 'F'
     else:
         print(f'{line_no}: ERROR => Instruction not Defined')
@@ -106,7 +106,7 @@ def typeA(strlist):
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     else:
-        print('ERROR: Register not Defined')
+        print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
     r2 = strlist[2]
@@ -328,7 +328,7 @@ def typeE(strlist, mem):
 
 
 def typeF(strlist):
-    if strlist != 'hlt':
+    if strlist != 'hlt\n':
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     strF = '01010' + '0'*11
