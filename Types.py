@@ -328,7 +328,7 @@ def typeE(strlist, mem):
 
 
 def typeF(strlist):
-    if strlist != 'hlt\n':
+    if strlist != 'hlt':
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     strF = '01010' + '0'*11
