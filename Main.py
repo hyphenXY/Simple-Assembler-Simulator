@@ -18,7 +18,7 @@ def take_input():
     input_arr = []
 
     for line in sys.stdin:
-        line_arr = [str(x) for x in line.split(" ")]
+        line_arr = [str(x) for x in line[:-1].split(" ")]
         input_arr.append(line_arr)
 
         line_no = 1
@@ -36,7 +36,7 @@ def take_input():
             var_flag = 1
 
         if line_arr[0] != "var" and line_arr[0][-1] != ':':
-            ins_type = Type(line_arr[1:])
+            ins_type = Type(line_arr)
             if ins_type == 'A' and len(line_arr) == 4:
                 pass
             elif ins_type == 'B' and len(line_arr) == 3:
@@ -84,14 +84,13 @@ def take_input():
 
 
 def give_output(input_arr):
+    var_arr = []
+    label_arr = []
+    output_arr = []
+
+    var_flag = 0
+
     for line_arr in input_arr:
-        var_arr = []
-        label_arr = []
-        output_arr = []
-
-        line_no = 1
-        var_flag = 0
-
         if len(line_arr) > 5:
             print("'ERROR: Invalid Instruction'")
             exit()
