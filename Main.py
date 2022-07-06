@@ -39,7 +39,7 @@ def Type(strlist):
         return 'D'
     elif strlist[0] == 'mul' and len(strlist) == 4:
         return 'A'
-    elif strlist[0] == 'div' and len(strlist) == 4:
+    elif strlist[0] == 'div' and len(strlist) == 3:
         return 'C'
     elif strlist[0] == 'rs' and len(strlist) == 3:
         return 'B'
