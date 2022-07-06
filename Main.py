@@ -192,6 +192,8 @@ def typeB(strlist):
         print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
+    if int(strlist[2][1:]) > 255 or int(strlist[2][1:]) < 0:
+        print(f'{line_no}: ERROR => Number is not between 0 and 255')
     ans += binary(int(strlist[2][1:]))
 
     return ans
@@ -468,9 +470,9 @@ def give_output(input_arr):
                 output_arr.append(typeB(line_arr))
             elif ins_type == 'C' and len(line_arr) == 3:
                 output_arr.append(typeC(line_arr))
-            elif ins_type == 'D' and len(line_arr) == 3:
+            elif ins_type == 'D' and len(line_arr) == 3 and line_arr[2] in var_arr:
                 output_arr.append(typeD(line_arr, d[line_arr[2]]))
-            elif ins_type == 'E' and len(line_arr) == 2:
+            elif ins_type == 'E' and len(line_arr) == 2 and line_arr[1] in label_arr:
                 output_arr.append(typeE(line_arr, d[line_arr[1]]))
             elif ins_type == 'F' and len(line_arr) == 1:
                 output_arr.append(typeF(line_arr))
@@ -486,9 +488,9 @@ def give_output(input_arr):
                 output_arr.append(typeB(line_arr[1:]))
             elif ins_type == 'C' and len(line_arr) == 4:
                 output_arr.append(typeC(line_arr[1:]))
-            elif ins_type == 'D' and len(line_arr) == 4:
+            elif ins_type == 'D' and len(line_arr) == 4 and line_arr[3] in var_arr:
                 output_arr.append(typeD(line_arr[1:], d[line_arr[3]]))
-            elif ins_type == 'E' and len(line_arr) == 3:
+            elif ins_type == 'E' and len(line_arr) == 3 and line_arr[2] in label_arr:
                 output_arr.append(typeE(line_arr[1:], d[line_arr[2]]))
             elif ins_type == 'F' and len(line_arr) == 2:
                 output_arr.append(typeF(line_arr[1:]))
