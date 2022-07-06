@@ -103,7 +103,7 @@ def typeA(strlist):
     elif r1 == 'R5':
         ans += '101'
     elif r1 == 'R6':
-        ans += '100'
+        ans += '110'
     elif r1 == 'FLAGS':
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
