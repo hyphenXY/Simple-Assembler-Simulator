@@ -113,7 +113,7 @@ def typeA(strlist):
 
     r2 = strlist[2]
 
-    if r1 == 'R0':
+    if r2 == 'R0':
         ans += '000'
     elif r2 == 'R1':
         ans += '001'
@@ -126,8 +126,8 @@ def typeA(strlist):
     elif r2 == 'R5':
         ans += '101'
     elif r2 == 'R6':
-        ans += '100'
-    elif r1 == 'FLAGS':
+        ans += '110'
+    elif r2 == 'FLAGS':
         print(f'{line_no}: ERROR =>  Invalid Instruction')
         exit()
     else:
@@ -149,8 +149,8 @@ def typeA(strlist):
     elif r3 == 'R5':
         ans += '101'
     elif r3 == 'R6':
-        ans += '100'
-    elif r1 == 'FLAGS':
+        ans += '110'
+    elif r3 == 'FLAGS':
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
     else:
@@ -184,7 +184,7 @@ def typeB(strlist):
     elif r1 == 'R5':
         ans += '101'
     elif r1 == 'R6':
-        ans += '100'
+        ans += '110'
     elif r1 == 'FLAGS':
         print(f'{line_no}: ERROR => Invalid Instruction')
         exit()
