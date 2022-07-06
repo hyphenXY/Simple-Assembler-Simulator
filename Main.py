@@ -66,7 +66,7 @@ def Type(strlist):
     elif strlist[0] == 'hlt' and len(strlist) == 1:
         return 'F'
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Instruction not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Instruction not Defined\n')
         exit()
 
 
@@ -105,10 +105,10 @@ def typeA(strlist):
     elif r1 == 'R6':
         ans += '110'
     elif r1 == 'FLAGS':
-        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
         exit()
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     r2 = strlist[2]
@@ -128,10 +128,10 @@ def typeA(strlist):
     elif r2 == 'R6':
         ans += '110'
     elif r2 == 'FLAGS':
-        sys.stdout.write(f'{line_no}: ERROR =>  Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR =>  Invalid Instruction\n')
         exit()
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     r3 = strlist[3]
@@ -151,10 +151,10 @@ def typeA(strlist):
     elif r3 == 'R6':
         ans += '110'
     elif r3 == 'FLAGS':
-        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
         exit()
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     return ans
@@ -186,14 +186,14 @@ def typeB(strlist):
     elif r1 == 'R6':
         ans += '110'
     elif r1 == 'FLAGS':
-        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
         exit()
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     if int(strlist[2][1:]) >= 255 or int(strlist[2][1:]) <= 0:
-        sys.stdout.write(f'{line_no}: ERROR => Number is not between 0 and 255')
+        sys.stdout.write(f'{line_no}: ERROR => Number is not between 0 and 255\n')
     ans += binary(int(strlist[2][1:]))
 
     return ans
@@ -227,7 +227,7 @@ def typeC(strlist):
     elif strlist[1] == 'R6':
         ans += '110'
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     if strlist[2] == 'R0':
@@ -247,7 +247,7 @@ def typeC(strlist):
     elif strlist[2] == 'FLAGS' and strlist[0] == 'mov':
         ans += '111'
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+        sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
 
     return ans
@@ -273,10 +273,10 @@ def typeD(strlist, mem):
         elif r1 == 'R6':
             strD += '110'
         elif r1 == 'FLAGS' and r1 not in var_arr:
-            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
             exit()
         else:
-            sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+            sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
             exit()
 
         strD += mem
@@ -299,10 +299,10 @@ def typeD(strlist, mem):
         elif r1 == 'R6':
             strD += '110'
         elif r1 == 'FLAGS' and r1 not in var_arr:
-            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
             exit()
         else:
-            sys.stdout.write(f'{line_no}: ERROR => Register not Defined')
+            sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
             exit()
 
         strD += mem
@@ -325,7 +325,7 @@ def typeE(strlist, mem):
         strE += '01111000'
         strE += mem
     else:
-        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
         exit()
 
     return strE
@@ -333,7 +333,7 @@ def typeE(strlist, mem):
 
 def typeF(strlist):
     if strlist[0] != 'hlt':
-        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+        sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
         exit()
     strF = '01010' + '0'*11
     return strF
@@ -372,7 +372,7 @@ def take_input():
 
     for line in input_arr_1:
         if line == '':
-            sys.stdout.write(f'{input_arr_1.index(line)+1}: ERROR => Empty Line Given')
+            sys.stdout.write(f'{input_arr_1.index(line)+1}: ERROR => Empty Line Given\n')
             exit()
 
     input_arr = list((x.rstrip()).split(' ') for x in input_arr_1)
@@ -386,29 +386,29 @@ def take_input():
                     if hlt_flag == 0:
                         hlt_flag = 1
                     else:
-                        sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction')
+                        sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
                         exit()
         else:
             if line_arr[0] == 'hlt':
                 if hlt_flag == 0:
                     hlt_flag = 1
                 else:
-                    sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction')
+                    sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
                     exit()
 
     for line_arr in input_arr:
         if line_arr[0][-1] == ':':
             if len(line_arr) == 1:
-                sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Invalid Instruction')
+                sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Invalid Instruction\n')
                 exit()
 
     if input_arr[-1][0][-1] == ':':
         if input_arr[-1][1] != 'hlt':
-            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line')
+            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             exit()
     else:
         if input_arr[-1][0] != 'hlt':
-            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line')
+            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             exit()
 
     for line_arr in input_arr:
@@ -442,7 +442,7 @@ def give_output(input_arr):
 
     for line_arr in input_arr:
         if len(line_arr) > 5:
-            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+            sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
             exit()
 
         if line_arr[0] == 'var':
@@ -450,10 +450,10 @@ def give_output(input_arr):
                 if var_flag == 0:
                     var_arr.append(line_arr[1])
                 else:
-                    sys.stdout.write(f'{line_no}: ERROR => Variable Not Declared in Beginning')
+                    sys.stdout.write(f'{line_no}: ERROR => Variable Not Declared in Beginning\n')
                     exit()
             else:
-                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
                 exit()
         else:
             var_flag = 1
@@ -473,7 +473,7 @@ def give_output(input_arr):
             elif ins_type == 'F' and len(line_arr) == 1:
                 output_arr.append(typeF(line_arr))
             else:
-                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
                 exit()
 
         if line_arr[0] != 'var' and line_arr[0][-1] == ':':
@@ -491,7 +491,7 @@ def give_output(input_arr):
             elif ins_type == 'F' and len(line_arr) == 2:
                 output_arr.append(typeF(line_arr[1:]))
             else:
-                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction')
+                sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
                 exit()
 
         line_no += 1
