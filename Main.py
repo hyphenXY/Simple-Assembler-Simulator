@@ -271,7 +271,7 @@ def typeD(strlist, mem):
         elif r1 == 'R5':
             strD += '101'
         elif r1 == 'R6':
-            strD += '100'
+            strD += '110'
         elif r1 == 'FLAGS' and r1 not in var_arr:
             print(f'{line_no}: ERROR => Invalid Instruction')
             exit()
@@ -297,7 +297,7 @@ def typeD(strlist, mem):
         elif r1 == 'R5':
             strD += '101'
         elif r1 == 'R6':
-            strD += '100'
+            strD += '110'
         elif r1 == 'FLAGS' and r1 not in var_arr:
             print(f'{line_no}: ERROR => Invalid Instruction')
             exit()
