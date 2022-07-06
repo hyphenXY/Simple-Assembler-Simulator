@@ -192,7 +192,7 @@ def typeB(strlist):
         print(f'{line_no}: ERROR => Register not Defined')
         exit()
 
-    if int(strlist[2][1:]) > 255 or int(strlist[2][1:]) < 0:
+    if int(strlist[2][1:]) >= 255 or int(strlist[2][1:]) <= 0:
         print(f'{line_no}: ERROR => Number is not between 0 and 255')
     ans += binary(int(strlist[2][1:]))
 
