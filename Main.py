@@ -370,24 +370,47 @@ def take_input():
 
     for line in input_arr_1:
         if line == '':
-            idx = input_arr_1.index(line)
-            input_arr_1.pop(idx)
+            print(f'{input_arr_1.index(line)+1}: ERROR => Empty Line Given')
+            exit()
 
     input_arr = list((x.rstrip()).split(' ') for x in input_arr_1)
+
+    hlt_flag = 0
+
+    for line_arr in input_arr:
+        if line_arr[0][-1] == ':':
+            if len(line_arr) != 1:
+                if line_arr[1] == 'hlt':
+                    if hlt_flag == 0:
+                        hlt_flag = 1
+                    else:
+                        print(
+                            f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction')
+                        exit()
+        else:
+            if line_arr[0] == 'hlt':
+                if hlt_flag == 0:
+                    hlt_flag = 1
+                else:
+                    print(
+                        f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction')
+                    exit()
 
     for line_arr in input_arr:
         if line_arr[0][-1] == ':':
             if len(line_arr) == 1:
-                print(f'{line_no}: ERROR => Invalid Instruction')
+                print(f'{input_arr.index(line_arr)+1}: ERROR => Invalid Instruction')
                 exit()
 
     if input_arr[-1][0][-1] == ':':
         if input_arr[-1][1] != 'hlt':
-            print(f'{line_no}: ERROR => Missing "hlt" Instruction')
+            print(
+                f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line')
             exit()
     else:
         if input_arr[-1][0] != 'hlt':
-            print(f'{line_no}: ERROR => Missing "hlt" Instruction')
+            print(
+                f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line')
             exit()
 
     for line_arr in input_arr:
