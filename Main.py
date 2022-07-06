@@ -33,7 +33,7 @@ def Type(strlist):
             return 'B'
         else:
             return 'C'
-    elif strlist[0] == 'ld' and len(strlist) == 2:
+    elif strlist[0] == 'ld' and len(strlist) == 3:
         return 'D'
     elif strlist[0] == 'st' and len(strlist) == 3:
         return 'D'
