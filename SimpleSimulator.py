@@ -184,32 +184,32 @@ def Compares(pc,ins):
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
 
-def unconditional(pc,instruction):
+def unconditional(pc,ins):
      global d
      pc=decimal(ins[8:])
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
-def jmp_ifLT(pc,instruction):
+def jmp_ifLT(pc,ins):
      global d
      pc=decimal(ins[8:])
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
 
-def jmp_ifGT(pc,instruction):
+def jmp_ifGT(pc,ins):
      global d
      pc=decimal(ins[8:])
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
-def jmp_ifEQ(pc,instruction):
+def jmp_ifEQ(pc,ins):
      global d
      pc=decimal(ins[8:])
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
-def halt(pc,instruction):
+def halt(pc,ins):
      global d
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
@@ -546,7 +546,5 @@ def main():
           sys.stdout.write("0"*16)
           sys.stdout.write("\n")
           #countline+=1
-     
-          
-          
+              
 main()
