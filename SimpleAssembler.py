@@ -65,6 +65,12 @@ def Type(strlist):
         return 'E'
     elif strlist[0] == 'hlt' and len(strlist) == 1:
         return 'F'
+    elif strlist[0] == 'addf' and len(strlist) == 4:
+        return 'A'
+    elif strlist[0] == 'subf' and len(strlist) == 4:
+        return 'A'
+    elif strlist[0] == 'movf' and len(strlist) == 3:
+        return 'B'
     else:
         sys.stdout.write(f'{line_no}: ERROR => Instruction not Defined\n')
         exit()
@@ -85,6 +91,10 @@ def typeA(strlist):
         ans += '11011'
     elif strlist[0] == 'and':
         ans += '11100'
+    elif strlist[0] == 'addf':
+        ans += '00000'
+    elif strlist[0] == 'subf':
+        ans += '00001'
 
     ans += '00'
 
@@ -168,6 +178,8 @@ def typeB(strlist):
         ans += '11001'
     elif strlist[0] == 'rs':
         ans += '11000'
+    elif strlist[0] == 'movf':
+        ans += '00010'
 
     r1 = strlist[1]
 
