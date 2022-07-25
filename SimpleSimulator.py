@@ -23,7 +23,7 @@ def Subtraction(pc,ins):
      global d
      if (d[ins[10:13]]>d[ins[7:10]]):
           d[ins[13:16]]=0
-          d['111']='0'*12+'10000'
+          d['111']='0'*12+'1000'
           pc+=1
           lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
           return lst
@@ -233,8 +233,8 @@ def strreg(val):
      return data
 
 r0=0
-r1=0
-r2=0
+r1=5
+r2=10
 r3=0
 r4=0
 r5=0
@@ -287,7 +287,7 @@ def main():
                flag=lst[8]
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
                
-          elif(instruction[:5]=='10001'):
+          elif(instruction[:5]=='10001'):  #1000100001010011
                pc=strpc(PC)
                lst=Subtraction(PC,instruction)
                PC=lst[0]
@@ -546,5 +546,7 @@ def main():
           sys.stdout.write("0"*16)
           sys.stdout.write("\n")
           #countline+=1
-              
+     
+          
+          
 main()
