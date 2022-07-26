@@ -236,8 +236,8 @@ def strreg(val):
      return data
 
 r0=0
-r1=5
-r2=10
+r1=0
+r2=0
 r3=0
 r4=0
 r5=0
