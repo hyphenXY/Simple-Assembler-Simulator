@@ -343,7 +343,7 @@ def main():
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
           elif(instruction[:5]=='10100'):
                pc=strpc(PC)
-               lst=load(pc,instruction)
+               lst=load(PC,instruction)
                PC=lst[0]
                r0=strreg(lst[1])
                r1=strreg(lst[2])
@@ -383,7 +383,7 @@ def main():
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
           elif(instruction[:5]=='10111'):
                pc=strpc(PC)
-               lst=divide(pc,instruction)
+               lst=divide(PC,instruction)
                PC=lst[0]
                r0=strreg(lst[1])
                r1=strreg(lst[2])
