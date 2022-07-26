@@ -194,21 +194,29 @@ def unconditional(pc,ins):
      return lst
 def jmp_ifLT(pc,ins):
      global d
-     pc=decimal(ins[8:])
+     if d['111']=='0'*12+'0100':
+          pc=decimal(ins[8:])
+     else:
+          pc+=1
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
 
 def jmp_ifGT(pc,ins):
      global d
-     
-     pc=decimal(ins[8:])
+     if d['111']=='0'*12+'0010':
+          pc=decimal(ins[8:])
+     else:
+          pc+=1
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
 def jmp_ifEQ(pc,ins):
      global d
-     pc=decimal(ins[8:])
+     if d['111']=='0'*12+'0001':
+          pc=decimal(ins[8:])
+     else:
+          pc+=1
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
      return lst
