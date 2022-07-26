@@ -1,10 +1,12 @@
 import sys
 
 def decimal(num):
+     
      pwr=0
      ans=0
      for i in num[::-1]:
           ans=ans+(int(i)*(2**pwr))
+          pwr+=1
      return ans
           
 def Addition(pc,ins):
@@ -199,6 +201,7 @@ def jmp_ifLT(pc,ins):
 
 def jmp_ifGT(pc,ins):
      global d
+     
      pc=decimal(ins[8:])
      d['111']='0'*16
      lst=[pc,d['000'],d['001'],d['010'],d['011'],d['100'],d['101'],d['110'],d['111']]
@@ -256,6 +259,7 @@ def main():
      halted=False
      while(not halted):
           instruction=getdata[PC]
+          
           if (instruction[:5]=='01010'):
                halted=True
                pc=strpc(PC)
@@ -303,6 +307,7 @@ def main():
                
 
           elif(instruction[:5]=='10010'):
+
                pc=strpc(PC)
                lst=mov_imm(PC,instruction)
                PC=lst[0]
@@ -532,6 +537,13 @@ def main():
                sys.stdout.write(j+" ")
           sys.stdout.write("\n")
      default=256-(len(getdata)+len(mem))
+     sortedmem=[]
+     for i in mem:
+          sortedmem.append(decimal(i))
+     sortedmem.sort()
+     for i in range(len(mem)):
+          mem[i]=strreg(sortedmem[i])
+
      #countline=1
      for i in getdata:
           #sys.stdout.write(str(countline)+" : ")
@@ -540,7 +552,7 @@ def main():
      for i in mem:
           #sys.stdout.write(str(countline)+" : ")
           sys.stdout.write(i+"\n")
-          countline+=1
+          #countline+=1
      for i in range(default):
           #sys.stdout.write(str(countline)+" : ")
           sys.stdout.write("0"*16)
