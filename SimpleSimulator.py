@@ -355,7 +355,7 @@ def main():
                flag=lst[8]
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
           elif(instruction[:5]=='10101'):
-               mem.append("00000000"+instruction[8:])
+               mem.append(strreg(d[instruction[5:8]]))
                pc=strpc(PC)
                lst=store(PC,instruction)
                PC=lst[0]
@@ -545,12 +545,7 @@ def main():
                sys.stdout.write(j+" ")
           sys.stdout.write("\n")
      default=256-(len(getdata)+len(mem))
-     sortedmem=[]
-     for i in mem:
-          sortedmem.append(decimal(i))
-     sortedmem.sort()
-     for i in range(len(mem)):
-          mem[i]=strreg(sortedmem[i])
+     
 
      #countline=1
      for i in getdata:
