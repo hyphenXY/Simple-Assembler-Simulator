@@ -55,6 +55,9 @@ def mov_reg(pc,ins):
 
 def load(pc,ins):
      global d
+     keys=list(d.keys())
+     if(ins[8:] not in keys):
+          d[ins[8:]]=0
      d[ins[5:8]]=d[ins[8:]]
      d['111']='0'*16
      pc+=1
