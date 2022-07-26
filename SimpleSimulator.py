@@ -266,7 +266,7 @@ def main():
      PC=0
      
      output=[]
-     mem=[]
+     mem={}
    #  d={'000':r0,'001':r1,'010':r2,'011':r3,'100':r4,'101':r5,'110':r6,'111':flag}
      halted=False
      while(not halted):
@@ -303,7 +303,7 @@ def main():
                flag=lst[8]
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
                
-          elif(instruction[:5]=='10001'):  #1000100001010011
+          elif(instruction[:5]=='10001'):
                pc=strpc(PC)
                lst=Subtraction(PC,instruction)
                PC=lst[0]
@@ -347,6 +347,8 @@ def main():
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
           elif(instruction[:5]=='10100'):
                pc=strpc(PC)
+               if(instruction[8:] not in list(mem.keys())):
+                    mem[instruction[8:]]=0
                lst=load(PC,instruction)
                PC=lst[0]
                r0=strreg(lst[1])
@@ -359,7 +361,8 @@ def main():
                flag=lst[8]
                output.append([pc,r0,r1,r2,r3,r4,r5,r6,flag])
           elif(instruction[:5]=='10101'):
-               mem.append(strreg(d[instruction[5:8]]))
+               
+               mem[instruction[8:]]=d[instruction[5:8]]               
                pc=strpc(PC)
                lst=store(PC,instruction)
                PC=lst[0]
@@ -549,16 +552,21 @@ def main():
                sys.stdout.write(j+" ")
           sys.stdout.write("\n")
      default=256-(len(getdata)+len(mem))
-     
-
+     mem_list=list(mem.keys())
+     lst_sorted=[]
+     for i in mem_list:
+          lst_sorted.append(decimal(i))
+     lst_sorted.sort()
+     for i in range(len(mem_list)):
+          mem_list[i]=strreg(lst_sorted[i])[8:]
      #countline=1
      for i in getdata:
           #sys.stdout.write(str(countline)+" : ")
           sys.stdout.write(i+"\n")
           #countline+=1
-     for i in mem:
+     for i in mem_list:
           #sys.stdout.write(str(countline)+" : ")
-          sys.stdout.write(i+"\n")
+          sys.stdout.write(strreg(mem[i])+"\n")
           #countline+=1
      for i in range(default):
           #sys.stdout.write(str(countline)+" : ")
