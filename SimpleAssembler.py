@@ -54,16 +54,19 @@ def ftod(num):
             break
         para = fnum2
 
-        x = ans.index('.')
-        exp = x-1
-        mantissa = ans[1:x]+ans[x+1:]
+    x = ans.index('.')
+    exp = x-1
+    mantissa = ans[1:x]+ans[x+1:]
 
-        explen = len(bin(exp)[2:])
-        mlen = len(str(mantissa))
+    explen = len(bin(exp)[2:])
+    mlen = len(str(mantissa))
 
-        data = "0"*(3-explen) + str(bin(exp)
-                                    )[2:] + str(mantissa) + "0"*(5-mlen)
-        return data
+    data = "0"*(3-explen) + str(bin(exp)
+                                )[2:] + str(mantissa) + "0"*(5-mlen)
+    return data
+
+
+print(ftod('2.5'))
 
 
 def Type(strlist):
