@@ -23,6 +23,49 @@ def binary(n):
     return a1
 
 
+def ftod(num):
+    pwr = -1
+    ans = ''
+    idx = 0
+    for i in range(len(num)):
+        if(num[i] == '.'):
+            idx = i
+            break
+    itr = num[:idx]
+    ans += bin(int(itr))[2:]+'.'
+    fnum = float(num[idx:])
+    para = float(num[idx:])
+    check = []
+    check.append(para)
+    while(True):
+        numflt = para*(2)
+        numflt2 = str(numflt)
+        ans += numflt2[0]
+        fidx = 0
+        for i in range(len(numflt2)):
+            if numflt2[i] == '.':
+                fidx = i
+                break
+        fnum2 = float(numflt2[fidx:])
+        if (fnum2 in check):
+            break
+        check.append(fnum2)
+        if fnum2 == 0:
+            break
+        para = fnum2
+
+        x = ans.index('.')
+        exp = x-1
+        mantissa = ans[1:x]+ans[x+1:]
+
+        explen = len(bin(exp)[2:])
+        mlen = len(str(mantissa))
+
+        data = "0"*(3-explen) + str(bin(exp)
+                                    )[2:] + str(mantissa) + "0"*(5-mlen)
+        return data
+
+
 def Type(strlist):
     if strlist[0] == 'add' and len(strlist) == 4:
         return 'A'
@@ -215,7 +258,10 @@ def typeB(strlist):
                 f'{line_no}: ERROR => Number is not between 0 and 255\n')
             exit()
 
-    ans += binary(int(strlist[2][1:]))
+    if (strlist[0] == 'mov'):
+        ans += binary(int(strlist[2][1:]))
+    if (strlist[0] == 'movf'):
+        ans += ftod(str(float(strlist[2][1:])))
 
     return ans
 
