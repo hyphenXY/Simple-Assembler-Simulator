@@ -205,9 +205,10 @@ def typeB(strlist):
         exit()
 
     if int(strlist[2][1:]) >= 255 or int(strlist[2][1:]) <= 0:
-        sys.stdout.write(f'{line_no}: ERROR => Number is not between 0 and 255\n')
+        sys.stdout.write(
+            f'{line_no}: ERROR => Number is not between 0 and 255\n')
         exit()
-        
+
     ans += binary(int(strlist[2][1:]))
 
     return ans
@@ -240,6 +241,8 @@ def typeC(strlist):
         ans += '101'
     elif strlist[1] == 'R6':
         ans += '110'
+    elif strlist[1] == 'FLAGS' and strlist[0] == 'mov':
+        ans += '111'
     else:
         sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
@@ -258,8 +261,6 @@ def typeC(strlist):
         ans += '101'
     elif strlist[2] == 'R6':
         ans += '110'
-    elif strlist[2] == 'FLAGS' and strlist[0] == 'mov':
-        ans += '111'
     else:
         sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
@@ -386,10 +387,9 @@ def take_input():
 
     for line in input_arr_1:
         if line == '':
-            sys.stdout.write(f'{input_arr_1.index(line)+1}: ERROR => Empty Line Given\n')
-            exit()
+            input_arr_1.remove(line)
 
-    input_arr = list((x.rstrip()).split(' ') for x in input_arr_1)
+    input_arr = list(x.split() for x in input_arr_1)
 
     hlt_flag = 0
 
@@ -400,29 +400,34 @@ def take_input():
                     if hlt_flag == 0:
                         hlt_flag = 1
                     else:
-                        sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
+                        sys.stdout.write(
+                            f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
                         exit()
         else:
             if line_arr[0] == 'hlt':
                 if hlt_flag == 0:
                     hlt_flag = 1
                 else:
-                    sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
+                    sys.stdout.write(
+                        f'{input_arr.index(line_arr)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
                     exit()
 
     for line_arr in input_arr:
         if line_arr[0][-1] == ':':
             if len(line_arr) == 1:
-                sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Invalid Instruction\n')
+                sys.stdout.write(
+                    f'{input_arr.index(line_arr)+1}: ERROR => Invalid Instruction\n')
                 exit()
 
     if input_arr[-1][0][-1] == ':':
         if input_arr[-1][1] != 'hlt':
-            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+            sys.stdout.write(
+                f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             exit()
     else:
         if input_arr[-1][0] != 'hlt':
-            sys.stdout.write(f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+            sys.stdout.write(
+                f'{input_arr.index(line_arr)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             exit()
 
     for line_arr in input_arr:
@@ -464,7 +469,8 @@ def give_output(input_arr):
                 if var_flag == 0:
                     var_arr.append(line_arr[1])
                 else:
-                    sys.stdout.write(f'{line_no}: ERROR => Variable Not Declared in Beginning\n')
+                    sys.stdout.write(
+                        f'{line_no}: ERROR => Variable Not Declared in Beginning\n')
                     exit()
             else:
                 sys.stdout.write(f'{line_no}: ERROR => Invalid Instruction\n')
@@ -524,4 +530,3 @@ output_arr = give_output(input_arr)
 for x in output_arr:
     sys.stdout.write(x)
     sys.stdout.write('\n')
-    
