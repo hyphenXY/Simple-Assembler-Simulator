@@ -281,67 +281,84 @@ def halt(pc, ins):
            d['100'], d['101'], d['110'], d['111']]
     return lst
 
+
 def fun(str1):
-    pwr=-1
-    ans=0
+    pwr = -1
+    ans = 0
     for i in str1:
-        ans+=int(i)*(2**pwr)
-        pwr-=1
+        ans += int(i)*(2**pwr)
+        pwr -= 1
     return ans
+
+
 def fconvert(val):
     valm = val[3:]
     vale = val[:3]
 
     valm += "00000000000000000"
-    
+
     edec = decimal(vale)
     valbin = "1" + valm[:edec] + "." + valm[edec:]
-    ans=str(decimal("1"+valm[:edec])+fun(valm[edec:]))
+    ans = str(decimal("1"+valm[:edec])+fun(valm[edec:]))
     return ans
-            
 
-    
-    
-def F_Addition(pc,ins):
-    global d
-    a=fconvert(strreg(d[ins[7:10]])[8:])
-    b=fconvert(strreg(d[ins[10:13]])[8:])
-    
-    
-    d[ins[13:16]]=a+b
-    if(d[ins[13:16]]>252.0):
-         d['111']='0'*12+'1000'
+
+def strreg(val):
+    if('.' in str(val)):
+        data = ftod(str(val))
     else:
-        d['111']='0'*16
-    pc+=1
-    lst = [pc, d['000'], d['001'], d['010'], d['011'],d['100'], d['101'], d['110'], d['111']]
-    return lst
-def F_Subtraction(pc,ins):
+        data = bin(val)[2:]
+    data = '0'*(16-len(data))+data
+    return data
+
+
+def F_Addition(pc, ins):
     global d
-    a=fconvert(strreg(d[ins[7:10]])[8:])
-    b=fconvert(strreg(d[ins[10:13]])[8:])
-    
-    if(b>a):
-        d['111']='0'*12+'1000'
-        d[ins[13:16]]=0
-        pc+=1
-        lst = [pc, d['000'], d['001'], d['010'], d['011'],d['100'], d['101'], d['110'], d['111']]
+    a = fconvert(strreg(d[ins[7:10]])[8:])
+    b = fconvert(strreg(d[ins[10:13]])[8:])
+
+    d[ins[13:16]] = a+b
+    if(d[ins[13:16]] > 252.0):
+        d['111'] = '0'*12+'1000'
+    else:
+        d['111'] = '0'*16
+    pc += 1
+    lst = [pc, d['000'], d['001'], d['010'], d['011'],
+           d['100'], d['101'], d['110'], d['111']]
+    return lst
+
+
+def F_Subtraction(pc, ins):
+    global d
+    a = fconvert(strreg(d[ins[7:10]])[8:])
+    b = fconvert(strreg(d[ins[10:13]])[8:])
+
+    if(b > a):
+        d['111'] = '0'*12+'1000'
+        d[ins[13:16]] = 0
+        pc += 1
+        lst = [pc, d['000'], d['001'], d['010'], d['011'],
+               d['100'], d['101'], d['110'], d['111']]
         return lst
 
-        
-    d[ins[13:16]]=a-b
-    d['111']='0'*16
-    pc+=1
-    lst = [pc, d['000'], d['001'], d['010'], d['011'],d['100'], d['101'], d['110'], d['111']]
+    d[ins[13:16]] = a-b
+    d['111'] = '0'*16
+    pc += 1
+    lst = [pc, d['000'], d['001'], d['010'], d['011'],
+           d['100'], d['101'], d['110'], d['111']]
     return lst
-def Move_F_immediate(pc,ins):
+
+
+def Move_F_immediate(pc, ins):
     global d
-    d[ins[5:8]]=fconvert(ins[8:])
-    d['111']='0'*16
-    pc+=1
-    lst = [pc, d['000'], d['001'], d['010'], d['011'],d['100'], d['101'], d['110'], d['111']]
+    d[ins[5:8]] = fconvert(ins[8:])
+    d['111'] = '0'*16
+    pc += 1
+    lst = [pc, d['000'], d['001'], d['010'], d['011'],
+           d['100'], d['101'], d['110'], d['111']]
     return lst
-    
+
+
 def strpc(val):
     data = bin(val)[2:]
     data = '0'*(8-len(data))+data
@@ -349,63 +366,56 @@ def strpc(val):
 
 
 def take_input():
-    input_list = []
-    for line in sys.stdin:
-        if(len(line[:-1]) != 16):
-            sys.stdout.write(
-                "ERROR: An unidentified line format has been detected.\n")
-            exit()
-        input_list.append(line[:-1])
+    input_arr = sys.stdin.read().splitlines()
+    for line in input_arr:
+        if(line == ''):
+            input_arr.remove(line)
+    input_list = list(x for x in input_arr)
 
     return input_list
 
+
 def ftod(num):
-        pwr = -1
-        ans = ''
-        idx = 0
-        for i in range(len(num)):
-            if(num[i] == '.'):
-                idx = i
+    pwr = -1
+    ans = ''
+    idx = 0
+    for i in range(len(num)):
+        if(num[i] == '.'):
+            idx = i
+            break
+    itr = num[:idx]
+    ans += bin(int(itr))[2:]+'.'
+    fnum = float(num[idx:])
+    para = float(num[idx:])
+    check = []
+    check.append(para)
+    while(True):
+        numflt = para*(2)
+        numflt2 = str(numflt)
+        ans += numflt2[0]
+        fidx = 0
+        for i in range(len(numflt2)):
+            if numflt2[i] == '.':
+                fidx = i
                 break
-        itr = num[:idx]
-        ans += bin(int(itr))[2:]+'.'
-        fnum = float(num[idx:])
-        para = float(num[idx:])
-        check = []
-        check.append(para)
-        while(True):
-            numflt = para*(2)
-            numflt2 = str(numflt)
-            ans += numflt2[0]
-            fidx = 0
-            for i in range(len(numflt2)):
-                if numflt2[i] == '.':
-                    fidx = i
-                    break
-            fnum2 = float(numflt2[fidx:])
-            if (fnum2 in check):
-                break
-            check.append(fnum2)
-            if fnum2 == 0:
-                break
-            para = fnum2
-        
+        fnum2 = float(numflt2[fidx:])
+        if (fnum2 in check):
+            break
+        check.append(fnum2)
+        if fnum2 == 0:
+            break
+        para = fnum2
+
         x = ans.index('.')
         exp = x-1
         mantissa = ans[1:x]+ans[x+1:]
-    
+
         explen = len(bin(exp)[2:])
         mlen = len(str(mantissa))
 
-        data = "0"*(3-explen) + str(bin(exp))[2:] + str(mantissa) + "0"*(5-mlen)
+        data = "0"*(3-explen) + str(bin(exp)
+                                    )[2:] + str(mantissa) + "0"*(5-mlen)
         return data
-def strreg(val):
-    if('.' in str(val)):
-        data=ftod(str(val))
-    else:
-        data=bin(val)[2:]
-    data = '0'*(16-len(data))+data
-    return data
 
 
 r0 = 0
@@ -762,15 +772,15 @@ def main():
         mem_list[i] = strreg(lst_sorted[i])[8:]
     # countline=1
     for i in getdata:
-        #sys.stdout.write(str(countline)+" : ")
+        # sys.stdout.write(str(countline)+" : ")
         sys.stdout.write(i+"\n")
         # countline+=1
     for i in mem_list:
-        #sys.stdout.write(str(countline)+" : ")
+        # sys.stdout.write(str(countline)+" : ")
         sys.stdout.write(strreg(mem[i])+"\n")
         # countline+=1
     for i in range(default):
-        #sys.stdout.write(str(countline)+" : ")
+        # sys.stdout.write(str(countline)+" : ")
         sys.stdout.write("0"*16)
         sys.stdout.write("\n")
         # countline+=1
