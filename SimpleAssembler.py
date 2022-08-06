@@ -203,11 +203,17 @@ def typeB(strlist):
     else:
         sys.stdout.write(f'{line_no}: ERROR => Register not Defined\n')
         exit()
+    if strlist[0] == 'mov':
+        if int(strlist[2][1:]) >= 255 or int(strlist[2][1:]) <= 0:
+            sys.stdout.write(
+                f'{line_no}: ERROR => Number is not between 0 and 255\n')
+            exit()
 
-    if int(strlist[2][1:]) >= 255 or int(strlist[2][1:]) <= 0:
-        sys.stdout.write(
-            f'{line_no}: ERROR => Number is not between 0 and 255\n')
-        exit()
+    if strlist[0] == 'movf':
+        if int(strlist[2][1:]) >= 252 or int(strlist[2][1:]) <= 0:
+            sys.stdout.write(
+                f'{line_no}: ERROR => Number is not between 0 and 255\n')
+            exit()
 
     ans += binary(int(strlist[2][1:]))
 
